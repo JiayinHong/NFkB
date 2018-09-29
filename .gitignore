@@ -1,0 +1,7 @@
+*.csv
+*.avi
+*.png
+*.mat
+*.m~
+.DS_Store
+sketch*.m

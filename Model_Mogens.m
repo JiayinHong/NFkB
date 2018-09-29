@@ -1,8 +1,8 @@
-function dy = ModelD(t,y,paramD,input)
+function dy = Model_Mogens(t,y,paramD,input)
 
 % unwrap the parameters
-knin = 	 paramD.knin;
-klin =   paramD.klin;
+kNin = 	 paramD.kNin;
+kIin =   paramD.kIin;
 kt =     paramD.kt;
 ktl =    paramD.ktl;
 KI =     paramD.KI;
@@ -21,7 +21,7 @@ A20 =    paramD.A20;
 switch input
     case 'sustained'
         TNF = paramD.TNF;
-    case 'periodical'
+    case 'sine'
         loadGlobal
         TNF = paramD.TNF * (sin(omega * t + phi) + 1);
 end
@@ -36,7 +36,7 @@ dy=zeros(5,1);
 % y(5): IKKi - inactive IkB kinase
 % #####################
 
-dy(1) = knin*(Ntot-y(1))*KI/(KI+y(3)) - klin*y(3)*y(1)/(KN+y(1));
+dy(1) = kNin*(Ntot-y(1))*KI/(KI+y(3)) - kIin*y(3)*y(1)/(KN+y(1));
 dy(2) = kt*y(1)^2 - gamma*y(2);
 dy(3) = ktl*y(2) - alpha*y(4)*(Ntot-y(1))*y(3)/(KI+y(3));
 dy(4) = ka*TNF*(IKKtot-y(4)-y(5)) - ki*y(4);
